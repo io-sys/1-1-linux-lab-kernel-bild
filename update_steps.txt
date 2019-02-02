@@ -30,7 +30,6 @@ yum install gcc gcc-c++ autoconf automake
 # Подтвердить все новые опции или yes "" | make oldconfig
 make oldconfig
 yum install ncurses-devel
-# Отключу Wireless и Bluetooth и добавлю префикс no_bt_no_wifi 
 make menuconfig
 # Проверяю сколько ядер.
 echo  `nproc`
