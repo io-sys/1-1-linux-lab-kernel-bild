@@ -7,7 +7,7 @@ uname -r
 # 3.10.0-514.21.1.el7.x86_64
 cd /usr/src
 pwd 
-# Проверка существования ссылки linux
+# Проверка существования ссылки linux в каталоге /usr/src
 ls -l
 # Обновлю ядро на longterm: 3.16.62, скачаю тарбол.
 wget https://cdn.kernel.org/pub/linux/kernel/v3.x/linux-3.16.62.tar.xz
