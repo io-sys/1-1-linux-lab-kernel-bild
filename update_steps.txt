@@ -1,0 +1,59 @@
+# 1-1-linux-lab-kernel-bild
+# Обновление ядра Linux рабочей станции с CentOS.
+# 3.10.0  → 3.16.62
+
+yum update
+uname -r
+# 3.10.0-514.21.1.el7.x86_64
+cd /usr/src
+pwd 
+# Проверка существования ссылки linux
+ls -l
+# Обновлю ядро на longterm: 3.16.62, скачаю тарбол.
+wget https://cdn.kernel.org/pub/linux/kernel/v3.x/linux-3.16.62.tar.xz
+ls -l
+# Разархивирую тарбол с исходными текстами ядра.
+tar xf ./linux-3.16.62.tar.xz 
+ls -l
+# Создам ссылку linux в /usr/src/linux-3.16.62
+ln -s linux-3.16.62 linux
+ls -l
+# Взят старый конфигурационный файл.
+cp /boot/config-3.10.0-514.21.1.el7.x86_64 /usr/src/linux/.config
+# Проверяю содержимое файла .config
+less ./linux/.config
+cd linux
+# Старый конфигурационный файл подготавливаем утилитой make oldconfig , много текстовых вопросов.
+make oldconfig
+# -- нет gcc 
+yum install gcc gcc-c++ autoconf automake
+# Подтвердить все новые опции или yes "" | make oldconfig
+make oldconfig
+yum install ncurses-devel
+# Отключу Wireless и Bluetooth и добавлю префикс no_bt_no_wifi 
+make menuconfig
+# Проверяю сколько ядер.
+echo  `nproc`
+# Собираю ядро на всех ядрах процессора.
+# make -j `nproc` && make modules_install && make install
+make -j `nproc`
+# Собираю модули на всех ядрах.
+make -j `nproc` modules
+# Ставлю модули.
+make modules_install
+# Ставлю ядро.
+make install
+ll /boot/  | grep 3.16
+# -rw-------. 1 root root 51971235 Feb  2 17:04 initramfs-3.16.62.img
+# lrwxrwxrwx. 1 root root       24 Feb  2 16:43 System.map -> /boot/System.map-3.16.62
+# -rw-r--r--. 1 root root  3050518 Feb  2 16:43 System.map-3.16.62
+# lrwxrwxrwx. 1 root root       21 Feb  2 16:43 vmlinuz -> /boot/vmlinuz-3.16.62
+# -rw-r--r--. 1 root root  5274560 Feb  2 16:43 vmlinuz-3.16.62
+uname -r
+# 3.10.0-514.21.1.el7.x86_64
+reboot
+-
+# При загрузке в grub выбрал пункт с новым ядром.
+-
+uname -r
+3.16.62
