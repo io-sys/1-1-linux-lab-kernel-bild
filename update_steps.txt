@@ -42,12 +42,6 @@ make -j `nproc` modules
 make modules_install
 # Ставлю ядро.
 make install
-ll /boot/  | grep 3.16
-# -rw-------. 1 root root 51971235 Feb  2 17:04 initramfs-3.16.62.img
-# lrwxrwxrwx. 1 root root       24 Feb  2 16:43 System.map -> /boot/System.map-3.16.62
-# -rw-r--r--. 1 root root  3050518 Feb  2 16:43 System.map-3.16.62
-# lrwxrwxrwx. 1 root root       21 Feb  2 16:43 vmlinuz -> /boot/vmlinuz-3.16.62
-# -rw-r--r--. 1 root root  5274560 Feb  2 16:43 vmlinuz-3.16.62
 uname -r
 # 3.10.0-514.21.1.el7.x86_64
 reboot
