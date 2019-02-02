@@ -27,7 +27,7 @@ cd linux
 make oldconfig
 # -- нет gcc 
 yum install gcc gcc-c++ autoconf automake
-# Подтвердить все новые опции или yes "" | make oldconfig
+# Напоминание, чтобы подтвердить новые опции со значением по умолчанию, на Enter.
 make oldconfig
 yum install ncurses-devel
 make menuconfig
